@@ -78,6 +78,11 @@ def NamespacePair(database):
     return NamespacePair
 
 
+def make_string_safe_to_put_in_a_attribute(s):
+    return s.replace('"', "&quot;")
+
+
+
 [----]
 
 # Parse input
@@ -112,7 +117,6 @@ if collection == 'system.namespaces':
 # 1-index into the query results.
 
 optimize_count = False # If we can, compute the count without filtering.
-
 if not single:      # /server/database/collection/filter/page/
     # Parse the filter as JSON, possibly base64-encoded.
     base = '../..'
@@ -128,6 +132,7 @@ if not single:      # /server/database/collection/filter/page/
         # If there is no filter, we can safely compute the count from the
         # unfiltered collection, which appears to be O(1) instead of O(N).
         optimize_count = True
+    filter_as_string = make_string_safe_to_put_in_a_attribute(json.dumps(filter))
 
 elif collection == 'system.namespaces':
                     # /server/database/system.namespaces/collection/
@@ -283,6 +288,13 @@ if document is not None: # XXX Can document ever be None?
     <tr class="big collection">
         <th><a href="/{{ server }}/{{ database }}/" title="Click for All Collections">Collection</a></th>
         <td>{{ collection }}</td>
+    </tr>
+    <tr class="big filter">
+        <th><a title="filter">Filter</a></th>
+        <td><input type="text" id="filter_text" value="{{ filter_as_string }}">
+            <button id="apply-filter">apply</button>
+            <button id="remove-filter">remove</button>
+        </td>
     </tr>
     <tr class="big document">
         <th>{% if filtered %}<span><a href="/{{ server }}/{{ database }}/{{ collection }}/"
