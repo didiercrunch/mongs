@@ -290,10 +290,15 @@ if document is not None: # XXX Can document ever be None?
         <td>{{ collection }}</td>
     </tr>
     <tr class="big filter">
-        <th><a title="filter">Filter</a></th>
-        <td><input type="text" id="filter_text" value="{{ filter_as_string }}">
-            <button id="apply-filter">apply</button>
-            <button id="remove-filter">remove</button>
+        <th><span title="filter">Filter</span></th>
+        <td style="padding: 0px;">
+            <div id="filter-container">
+                <div id="filter-input-container">
+                    <input type="text" id="filter_text" value="{{ filter_as_string }}">
+                </div>
+                <button id="apply-filter">apply</button>
+                <button id="remove-filter">remove</button>
+            </div>
         </td>
     </tr>
     <tr class="big document">
