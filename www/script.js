@@ -113,11 +113,17 @@ function verifyFilterStringInInput($node){
     }
 }
 
-
+function applyFilterIfEnterHit(evt){
+    if (evt.keyCode == 13) {
+        applyFilter()
+    }
+    
+}
 $(document).ready(function() {
     $('TH A').hover(addEss, removeEss);
     $('#apply-filter').click(applyFilter);
     $('#remove-filter').click(removeFilter);
+    $('#filter_text').keyup(applyFilterIfEnterHit);
     $(".filter INPUT").focusin(addFocusClass);
     $(".filter INPUT").focusout(removeFocusClass);
 });
