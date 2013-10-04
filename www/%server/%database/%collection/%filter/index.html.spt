@@ -130,6 +130,7 @@ if collection == 'system.namespaces':
 # 1-index into the query results.
 
 optimize_count = False # If we can, compute the count without filtering.
+filter_as_string = {}
 if not single:      # /server/database/collection/filter/page/
     # Parse the filter as JSON, possibly base64-encoded.
     base = '../..'

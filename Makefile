@@ -1,6 +1,6 @@
 env:
-	virtualenv env
-	./env/bin/pip install -r requirements.txt
+	virtualenv-2.7 env
+	./env/bin/pip-2.7 install -r requirements.txt
 
 clean:
 	rm -rf env
